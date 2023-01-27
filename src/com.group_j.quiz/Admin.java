@@ -101,7 +101,113 @@ public class Admin {
 			e.printStackTrace();
 		}
 	}
+	public void printData(ResultSet rs) { //Jyoti
+		try {
+			if (!rs.isBeforeFirst()) {
+				System.out.println("The provided id is not present in the DataBase");
+			} else {
 
-	
+				List<String> columns = new ArrayList<>();
+
+				columns.add("ID");
+				columns.add("User Name");
+				columns.add("Marks");
+				columns.add("Grade");
+				columns.add("Remark");
+				int[] columnWidths = new int[5];
+				for (int i = 0; i < 5; i++) {
+					columnWidths[i] = columns.get(i).length();
+				}
+				while (rs.next()) {
+					for (int i = 1; i <= 5; i++) {
+						int width = rs.getString(i).length();
+						if (width > columnWidths[i - 1]) {
+							columnWidths[i - 1] = width;
+						}
+					}
+				}
+				StringBuilder sb = new StringBuilder();
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < columnWidths[i] + 2; j++) {
+						sb.append("-");
+					}
+					sb.append("+");
+				}
+				System.out.println(sb);
+				sb.setLength(0);
+				for (int i = 0; i < 5; i++) {
+					sb.append(String.format("%-" + (columnWidths[i] + 2) + "s|", columns.get(i)));
+				}
+				System.out.println(sb);
+				sb.setLength(0);
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < columnWidths[i] + 2; j++) {
+						sb.append("-");
+					}
+					sb.append("+");
+				}
+				System.out.println(sb);
+				sb.setLength(0);
+				rs.beforeFirst();
+				while (rs.next()) {
+					for (int i = 1; i <= 5; i++) {
+						sb.append(String.format("%-" + (columnWidths[i - 1] + 2) + "s|", rs.getString(i)));
+					}
+					System.out.println(sb);
+					sb.setLength(0);
+				}
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < columnWidths[i] + 2; j++) {
+						sb.append("-");
+					}
+					sb.append("+");
+				}
+				System.out.println(sb);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+
+	}
+
+		
+	public void adminlogin() { //Jyoti
+		boolean flag = checkPass();
+		if (flag) {
+			System.out.println("Login Successful....");
+			System.out.println();
+			System.out.println("1. Search Result by ID");
+			System.out.println("2. Display Database");
+			System.out.println("3. Clear All Records");
+			int i = sc.nextInt();
+
+			switch (i) {
+			case 1:
+				System.out.println("Enter Id to get Score");
+				int id = sc.nextInt();
+
+				ResultSet ds = getData(id);
+				printData(ds);
+
+				break;
+
+			case 2:
+				printAllData();
+				break;
+				
+			case 3:
+				clearRecords();
+				break;
+
+			default:
+				System.out.println("Incorrect Choice");
+				adminlogin();
+			}
+
+		}
+		sc.close();
+	}
 
 }

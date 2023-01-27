@@ -20,6 +20,45 @@ public class Questions {
 	int currentRow;
 	int i = 1;
 
+	public void checkAnswers(String usrinput) {  //Jyoti
+		try {
+			Connector connector = new Connector();
+			con = connector.getDBConnection();
+			String sql = "SELECT correct_answer FROM quiz.mcq WHERE id=?";
+
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, currentRow);
+			ResultSet answers = ps.executeQuery();
+			String correctAnswer = "";
+			if (answers.next()) {
+				correctAnswer = answers.getString("correct_answer");
+
+			}
+
+			if (usrinput.equals(correctAnswer)) {
+				score = score + 1;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void recordData(String name, int score, String grade, String remark) throws SQLException { //Jyoti
+
+		Connector connector = new Connector();
+		con = connector.getDBConnection();
+		String sql = "INSERT INTO `quiz`.`record`(`usrName`,`Score`,`grade`,`remark`) VALUES(?,?,?,?);";
+		ps = con.prepareStatement(sql);
+		ps.setString(1, name);
+		ps.setInt(2, score);
+		ps.setString(3, grade);
+		ps.setString(4, remark);
+		ps.executeUpdate();
+
+	}
+
 	
 	public void takeTest() {   //Jayesh
 
