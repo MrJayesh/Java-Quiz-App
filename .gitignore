@@ -3,5 +3,4 @@
 .settings/
 bin/
 ignore/
-quiz_mcq.sql
-quiz_record.sql
+
