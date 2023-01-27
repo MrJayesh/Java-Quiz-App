@@ -118,5 +118,26 @@ public class Questions {
 		}
 
 	}
+	public void getGrade(int score) {  //Nikhil
+		// Class A- 8-10
+		// Class B- 6-8
+		// Class C- 5
+		// Class D- <5 then its fail.
+		if (score >= 8 && score <= 10) {
+			grade = "A";
+			remark = "Pass";
+		} else if (score >= 6 && score < 8) {
+			grade = "B";
+			remark = "Pass";
+		} else if (score == 5) {
+			grade = "C";
+			remark = "Pass";
+		} else if (score < 5) {
+			grade = "D";
+			remark = "Fail";
+		}
+
+	}
+
 
 }

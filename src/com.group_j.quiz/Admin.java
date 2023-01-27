@@ -13,6 +13,23 @@ public class Admin {
 	Scanner sc = new Scanner(System.in);
 
 	
+	public boolean checkPass() { //Nikhil
+
+		System.out.println("Enter Password");
+
+		String input = sc.next();
+
+		while (!input.equals(correctPassword)) {
+			System.out.print("Enter password: ");
+			input = sc.nextLine();
+			if (!input.equals(correctPassword)) {
+				System.out.println("Incorrect password. Please try again.");
+			}
+		}
+
+		return true;
+
+	}
 
 	
 
