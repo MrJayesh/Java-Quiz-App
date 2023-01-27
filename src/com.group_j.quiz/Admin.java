@@ -171,6 +171,35 @@ public class Admin {
 		}
 
 	}
+	public ResultSet getData(int id) { //Kajal
+		try {
+			Connector connector = new Connector();
+			con = connector.getDBConnection();
+			String sql = "SELECT Id, usrName, Score, grade, remark FROM quiz.record WHERE Id=?";
+			ps = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			return rs;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+	public void clearRecords() { //Kajal
+		try {
+			Connector connector = new Connector();
+			con = connector.getDBConnection();
+			String sql="truncate `quiz`.`record`;";
+			PreparedStatement ps=con.prepareStatement(sql);
+			ps.executeUpdate();
+			System.out.println("ALL RECORDS CLEARED SUCCESSFULLY....");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 		
 	public void adminlogin() { //Jyoti

@@ -59,6 +59,16 @@ public class Questions {
 
 	}
 
+	public ResultSet returnQuestions() throws SQLException { //Kajal
+
+		Connector connector = new Connector();
+		con = connector.getDBConnection();
+		String sql = "SELECT questions, option1, option2, option3, option4 FROM quiz.mcq LIMIT 10";
+		ps = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		ResultSet rs = ps.executeQuery();
+		return rs;
+
+	}
 	
 	public void takeTest() {   //Jayesh
 
@@ -109,6 +119,7 @@ public class Questions {
 
 					}
 				}
+				
 
 				System.out.println();
 				rs.absolute(row);
