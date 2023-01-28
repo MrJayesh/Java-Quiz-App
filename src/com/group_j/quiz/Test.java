@@ -1,3 +1,4 @@
+package com.group_j.quiz;
 import java.util.Scanner;
 
 public class Test {

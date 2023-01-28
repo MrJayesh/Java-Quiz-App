@@ -1,3 +1,4 @@
+package com.group_j.quiz;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Connection;
@@ -19,7 +20,7 @@ public class DataBase {
 
 				con = connector.getDBConnection();
 				
-				BufferedReader in = new BufferedReader(new FileReader(usrDir + "/src/" + s));
+				BufferedReader in = new BufferedReader(new FileReader(usrDir + "/src/com/group_j/quiz/" + s));
 				String str;
 				StringBuffer sb = new StringBuffer();
 				while ((str = in.readLine()) != null) {
